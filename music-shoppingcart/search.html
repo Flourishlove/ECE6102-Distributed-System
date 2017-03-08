@@ -34,6 +34,9 @@
         margin-top: 10px;
         overflow: scroll;
       }
+      .shoppingcart{
+        display: inline;
+      }
     </style>
   </head>
   <body>
@@ -57,19 +60,32 @@
       {% if artist %}
         {% if songs %}
           {% for song in songs %}
-          <p>
+
             {{song.artist }},
             {{song.title}},
             {{ song.album }},
             {{song.price}}
-          </p>
+            <!--
+            <a href="/search?genre_name={{ genre_name }}&artist={{ artist }}&song_back={{ song }}" class="btn btn-default">Add to cart</a>
+            -->
+            <form class="shoppingcart" action="/search" method="post">
+              <input type="hidden" value="{{genre_name}}" name="genre_name">
+              <input type="hidden" value="{{ artist }}" name="artist">
+              <input type="hidden" value="{{ song.artist }}" name="song_to_cart_artist">
+              <input type="hidden" value="{{ song.title }}" name="song_to_cart_title">
+              <input type="hidden" value="{{ song.album }}" name="song_to_cart_album">
+              <input type="hidden" value="{{ song.price }}" name="song_to_cart_price">
+              <input type="submit" class="btn btn-small" value="add to cart">
+            </form>
+            <div style="line-height: 130%"><br></div>
           {% endfor %}
         {% else %}
           No result in this genre
           {% endif %}
       {% endif %}
       <hr>
-      <form action="/search?genre_name={{ genre_name }}" method="post">
+      <form action="/search" method="post">
+        <input type="hidden" value="{{genre_name}}" name="genre_name">
         <div>Artist's Name:<textarea name="artist" class="input-block-level" rows="1" required></textarea></div>
         <div><input type="submit" class="btn btn-large btn-primary" value="Search"></div>
       </form>

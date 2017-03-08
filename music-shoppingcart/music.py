@@ -45,13 +45,15 @@ def genre_key(genre_name=DEFAULT_GENRE_NAME):
     """
     return ndb.Key('Genre', genre_name)
 
+def cart_key(cart_email):
+    return ndb.Key('Cart', cart_email)
+
 class Song(ndb.Model):
     """A main model for representing an individual Song entry."""
     artist = ndb.StringProperty()
     title = ndb.StringProperty()
     price = ndb.IntegerProperty()
     album = ndb.StringProperty(indexed=False)
-# [END greeting]
 
 # [START main_page]
 class MainPage(webapp2.RequestHandler):
@@ -156,6 +158,24 @@ class Search(webapp2.RequestHandler):
         genre_name = self.request.get('genre_name',
                                           DEFAULT_GENRE_NAME)
         artist = self.request.get('artist')
+
+        if self.request.get('song_to_cart_artist'):
+            user = users.get_current_user()
+            if user:
+                song_add = Song(parent=cart_key(user.email()))
+
+                song_add.artist = self.request.get('song_to_cart_artist')
+                song_add.title = self.request.get('song_to_cart_title')
+                song_add.album = self.request.get('song_to_cart_album')
+                song_add.price = int(self.request.get('song_to_cart_price'))
+                song_add.put()
+            else:
+                # if not login, first login then add to cart
+                # after sign in, redirect to original search result
+                self.redirect(users.create_login_url('/search?genre_name=' + genre_name + '&artist=' + artist))
+                return
+
+        print(users.get_current_user())
 
         self.redirect('/search?genre_name=' + genre_name + '&artist=' + artist)
 # [END search]

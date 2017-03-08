@@ -54,7 +54,8 @@
     <div class="container">
       <h2>Enter New Song</h2>
       <hr>
-      <form action="/enter?genre_name={{ genre_name }}" method="post">
+      <form action="/enter" method="post">
+        <input type="hidden" value="{{genre_name}}" name="genre_name">
         <div>Artist's Name:<textarea name="artist" class="input-block-level" rows="1" required></textarea></div>
         <div>Title:<textarea name="song_title" class="input-block-level" rows="3" required></textarea></div>
         <div>Price:<Input type="number" name="price" class="input-block-level" rows="3" required/></div>
