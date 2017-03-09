@@ -32,12 +32,6 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 DEFAULT_GENRE_NAME = 'hip-hop'
 
-
-# We set a parent key on the 'Greetings' to ensure that they are all
-# in the same entity group. Queries across the single entity group
-# will be consistent. However, the write rate should be limited to
-# ~1/second.
-
 def genre_key(genre_name=DEFAULT_GENRE_NAME):
     """Constructs a Datastore key for a Guestbook entity.
 
@@ -253,6 +247,22 @@ class ShoppingCart(webapp2.RequestHandler):
 
         template = JINJA_ENVIRONMENT.get_template('shoppingcart.html')
         self.response.write(template.render(template_values))
+
+    def post(self):
+        if self.request.get('song_id'):
+            user = users.get_current_user()
+            if user:
+                del_key_id = self.request.get('song_id')
+                print(del_key_id)
+                del_key = ndb.Key('Cart', user.email(), 'Song', int(del_key_id)) #have to use int to construct key id
+                print(del_key)
+                del_key.delete()
+            else:
+                # if not login, first login then add to cart
+                # after sign in, redirect to original search result
+                self.redirect(users.create_login_url('/shoppingcart'))
+                return
+        self.redirect('/shoppingcart')
 # [END shopping cart]
 
 # [START app]

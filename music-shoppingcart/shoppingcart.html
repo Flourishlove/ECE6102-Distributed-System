@@ -34,6 +34,9 @@
         margin-top: 10px;
         overflow: scroll;
       }
+      .shoppingcart{
+        display: inline;
+      }
     </style>
   </head>
   <body>
@@ -56,16 +59,20 @@
       <hr>
       <!-- [START songs] -->
       {% for song in songs %}
-      <p>
         {{song.artist }},
         {{song.title}},
         {{ song.album }},
         {{song.price}}
-      </p>
+        <form class="shoppingcart" action="/shoppingcart" method="post">
+            <input type="hidden" value="{{ song.key.id() }}" name="song_id">
+            <input type="submit" class="btn btn-small" value="delete">
+        </form>
+        <div style="line-height: 130%"><br></div>
+
       {% endfor %}
       <!-- [END songs] -->
-      <hr>
 
+      <hr>
       <a href="/">Return Main Page</a>
     </div>
   </body>
