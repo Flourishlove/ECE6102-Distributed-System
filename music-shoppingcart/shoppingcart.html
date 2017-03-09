@@ -47,30 +47,24 @@
           </button>
           <a class="brand" href="/">Music Repository</a>
           <div class="nav-collapse collapse pull-right">
-          <a href="/shoppingcart" class="btn">My Shopping Cart</a>
-          <a href="{{ url|safe }}" class="btn">{{ url_linktext }}</a>
           </div>
         </div>
       </div>
     </div>
     <div class="container">
-      <h2>Enter New Song</h2>
+      <h2>{{ cart_email }}'s shopping cart</h2>
       <hr>
-      <form action="/enter" method="post">
-        <input type="hidden" value="{{genre_name}}" name="genre_name">
-        <div>Artist's Name:<textarea name="artist" class="input-block-level" rows="1" required></textarea></div>
-        <div>Title:<textarea name="song_title" class="input-block-level" rows="3" required></textarea></div>
-        <div>Price:<Input type="number" name="price" class="input-block-level" rows="3" required/></div>
-        <div>Album(optional):<textarea name="album" class="input-block-level" rows="2"></textarea></div>
-        <div><input type="submit" class="btn btn-large btn-primary" value="Save Song Info"></div>
-      </form>
-
+      <!-- [START songs] -->
+      {% for song in songs %}
+      <p>
+        {{song.artist }},
+        {{song.title}},
+        {{ song.album }},
+        {{song.price}}
+      </p>
+      {% endfor %}
+      <!-- [END songs] -->
       <hr>
-
-      <form>Genre:
-        <input value="{{ genre_name }}" name="genre_name">
-        <input type="submit" value="switch">
-      </form>
 
       <a href="/">Return Main Page</a>
     </div>

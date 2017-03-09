@@ -34,6 +34,9 @@
         margin-top: 10px;
         overflow: scroll;
       }
+      .shoppingcart{
+        display: inline;
+      }
     </style>
   </head>
   <body>
@@ -47,6 +50,8 @@
           </button>
           <a class="brand" href="/">Music Repository</a>
           <div class="nav-collapse collapse pull-right">
+          <a href="/shoppingcart" class="btn">My Shopping Cart</a>
+          <a href="{{ url|safe }}" class="btn">{{ url_linktext }}</a>
           </div>
         </div>
       </div>
@@ -56,12 +61,22 @@
       <hr>
       <!-- [START songs] -->
       {% for song in songs %}
-      <p>
+
         {{song.artist }},
         {{song.title}},
         {{ song.album }},
         {{song.price}}
-      </p>
+
+        <form class="shoppingcart" action="/browse" method="post">
+            <input type="hidden" value="{{genre_name}}" name="genre_name">
+            <input type="hidden" value="{{ artist }}" name="artist">
+            <input type="hidden" value="{{ song.artist }}" name="song_to_cart_artist">
+            <input type="hidden" value="{{ song.title }}" name="song_to_cart_title">
+            <input type="hidden" value="{{ song.album }}" name="song_to_cart_album">
+            <input type="hidden" value="{{ song.price }}" name="song_to_cart_price">
+            <input type="submit" class="btn btn-small" value="add to cart">
+        </form>
+        <div style="line-height: 130%"><br></div>
       {% endfor %}
       <!-- [END songs] -->
       <hr>

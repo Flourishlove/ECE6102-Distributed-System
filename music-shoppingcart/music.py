@@ -83,8 +83,19 @@ class Enter(webapp2.RequestHandler):
     def get(self):
         genre_name = self.request.get('genre_name', DEFAULT_GENRE_NAME)
 
+        user = users.get_current_user()
+        if user:
+            url = users.create_logout_url(self.request.uri)
+            url_linktext = 'Logout'
+        else:
+            url = users.create_login_url(self.request.uri)
+            url_linktext = 'Login'
+
         template_values = {
-            'genre_name': urllib.quote_plus(genre_name)
+            'genre_name': urllib.quote_plus(genre_name),
+            'user': user,
+            'url': url,
+            'url_linktext': url_linktext,
         }
 
         template = JINJA_ENVIRONMENT.get_template('enter.html')
@@ -120,13 +131,45 @@ class Browse(webapp2.RequestHandler):
             ancestor=genre_key(genre_name)).order(Song.artist)
         songs = songs_query.fetch()
 
+        user = users.get_current_user()
+        if user:
+            url = users.create_logout_url(self.request.uri)
+            url_linktext = 'Logout'
+        else:
+            url = users.create_login_url(self.request.uri)
+            url_linktext = 'Login'
+
         template_values = {
+            'user': user,
+            'url': url,
+            'url_linktext': url_linktext,
             'songs': songs,
             'genre_name': urllib.quote_plus(genre_name)
         }
 
         template = JINJA_ENVIRONMENT.get_template('browse.html')
         self.response.write(template.render(template_values))
+
+    def post(self):
+
+        genre_name = self.request.get('genre_name',
+                                          DEFAULT_GENRE_NAME)
+        if self.request.get('song_to_cart_artist'):
+            user = users.get_current_user()
+            if user:
+                song_add = Song(parent=cart_key(user.email()))
+
+                song_add.artist = self.request.get('song_to_cart_artist')
+                song_add.title = self.request.get('song_to_cart_title')
+                song_add.album = self.request.get('song_to_cart_album')
+                song_add.price = int(self.request.get('song_to_cart_price'))
+                song_add.put()
+            else:
+                # if not login, first login then add to cart
+                # after sign in, redirect to original search result
+                self.redirect(users.create_login_url('/browse?genre_name=' + genre_name))
+                return
+        self.redirect('/browse?genre_name=' + genre_name)
 # [END browse]
 
 # [START search]
@@ -145,7 +188,18 @@ class Search(webapp2.RequestHandler):
                 if art.lower() in song.artist.lower():
                     songs.append(song)
 
+        user = users.get_current_user()
+        if user:
+            url = users.create_logout_url(self.request.uri)
+            url_linktext = 'Logout'
+        else:
+            url = users.create_login_url(self.request.uri)
+            url_linktext = 'Login'
+
         template_values = {
+            'user': user,
+            'url': url,
+            'url_linktext': url_linktext,
             'artist': art,
             'songs': songs,
             'genre_name': urllib.quote_plus(genre_name)
@@ -180,11 +234,33 @@ class Search(webapp2.RequestHandler):
         self.redirect('/search?genre_name=' + genre_name + '&artist=' + artist)
 # [END search]
 
+# [START shopping cart]
+class ShoppingCart(webapp2.RequestHandler):
+
+    def get(self):
+        if users.get_current_user():
+            cart_email = users.get_current_user().email()
+        else:
+            self.redirect(users.create_login_url('/shoppingcart'))
+            return
+        cart_query = Song.query(ancestor=cart_key(cart_email)).order(Song.artist)
+        songs = cart_query.fetch()
+
+        template_values = {
+            'songs': songs,
+            'cart_email': cart_email
+        }
+
+        template = JINJA_ENVIRONMENT.get_template('shoppingcart.html')
+        self.response.write(template.render(template_values))
+# [END shopping cart]
+
 # [START app]
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/enter', Enter),
     ('/browse', Browse),
     ('/search', Search),
+    ('/shoppingcart', ShoppingCart),
 ], debug=True)
 # [END app]
