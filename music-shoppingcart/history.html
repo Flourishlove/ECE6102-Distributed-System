@@ -50,29 +50,24 @@
           </button>
           <a class="brand" href="/">Music Repository</a>
           <div class="nav-collapse collapse pull-right">
-          <a href="/history" class="btn">My Purchase History</a>
           </div>
         </div>
       </div>
     </div>
     <div class="container">
-      <h2>{{ cart_email }}'s shopping cart</h2>
+      <h2>{{ cart_email }}'s purchased history</h2>
       <hr>
       <!-- [START songs] -->
-      {% for song in songs %}
-        {{song.artist }},
-        {{song.title}},
-        {{ song.album }},
-        {{song.price}}
-        <form class="shoppingcart" action="/shoppingcart" method="post">
-            <input type="hidden" value="{{ song.key.id() }}" name="song_del_id">
-            <input type="submit" class="btn btn-small" value="delete">
-        </form>
-        <div style="line-height: 130%"><br></div>
-
+      {% for purchased_songs in purchased_history %}
+        <p>{{ purchased_songs.date_time }}
+        {% for song in purchased_songs.song_list %}
+          {{song.artist }},
+          {{song.title}},
+          {{ song.album }},
+          {{song.price}}
+        {% endfor %}
+        Total Cost: {{ purchased_songs.total_cost}}</p>
       {% endfor %}
-      <p>Total Cost: {{total_cost}}</p>
-      <a class="btn btn-primary" href="/purchase">Purchase</a>
       <hr>
       <a href="/">Return Main Page</a>
     </div>
