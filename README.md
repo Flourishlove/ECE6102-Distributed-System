@@ -9,7 +9,7 @@ Music repository is a place where user can save and query songs' info. There are
 1. Error handling for inputs: Check for empty inputs and display an appropriate error message when an input field is left empty.
 2. Case sensitivity: Genre names and search strings should not be case sensitive.
 3. Returning to main page: There should be a simple way for users to return to the main page of your repository without having to use the back button.
-4. Failed searches: If a search string is entered that does not match any artists in the data store entries, an appropriate message should be displayed (instead of just redisplaying the search page without any results).
+4. Failed searches: If a search string is entered that does not match any artists in the data store entries, an appropriate message should be displayed.
 
 ## Shopping Cart Requirement:
 1. The browse and search displays must also include a mechanism for users to add any displayed song to their shopping cart.
