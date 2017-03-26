@@ -1,0 +1,33 @@
+# application: mapreduce-demo
+# version: 1
+runtime: python27
+api_version: 1
+threadsafe: no
+
+handlers:
+- url: /favicon.ico
+  static_files: static/images/favicon.ico
+  upload: static/images/favicon.ico
+
+# added
+
+#- url: /_ah/pipeline.*
+#  script: mapreduce.lib.pipeline.handlers._APP
+#  login: admin
+
+- url: /static/js/custom.js
+  static_files: static/js/custom.js
+  upload: static/js/custom.js
+
+- url: .*
+  script: main.app
+  login: required
+
+includes:
+- mapreduce/include.yaml
+
+libraries:
+- name: webapp2
+  version: "2.5.1"
+- name: jinja2
+  version: "2.6"
