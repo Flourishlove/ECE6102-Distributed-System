@@ -6,7 +6,7 @@
   </head>
   <body bgcolor="#66ccff">
     <div style="width:75%; background-color:#FFFFFF">
-      <h1>MapReduce in Three Simple Steps</h1>
+      <h1>MapReduce for Analyzing Transaction</h1>
       <h2>Step 1: Choose your input file:</h2>
       <div>{{ username }}'s files:</div>
       <br />
@@ -17,11 +17,15 @@
           <td>name</td>
           <td>uploaded on</td>
           <td>source</td>
-          <td>wordcount link</td>
           <td>songsoldnum link</td>
           <td>dollarsong link</td>
           <td>songartist link</td>
           <td>dollarartist link</td>
+          <td>jazzsongsoldnum link</td>
+          <td>jazzdollarsong link</td>
+          <td>jazzsongartist link</td>
+          <td>jazzdollarartist link</td>
+          <td>mostbuytogether link</td>
         </tr>
         {% for item in items %}
         <tr>
@@ -31,28 +35,129 @@
           <td>{{ item.uploadedOn }}</td>
           <td>{{ item.source }}</td>
           <td>
-            {% if item.wordcount_link %}
-            <a href="{{ item.wordcount_link }}">wordcount</a>
-            {% endif %}
-          </td>
-          <td>
             {% if item.songsoldnum_link %}
             <a href="{{ item.songsoldnum_link }}">songsoldnum</a>
+            {% endif %}
+            {% if item.songsoldnum_link1 %}
+            <a href="{{ item.songsoldnum_link1 }}">songsoldnum1</a>
+            {% endif %}
+            {% if item.songsoldnum_link2 %}
+            <a href="{{ item.songsoldnum_link2 }}">songsoldnum2</a>
+            {% endif %}
+            {% if item.songsoldnum_link3 %}
+            <a href="{{ item.songsoldnum_link3 }}">songsoldnum3</a>
             {% endif %}
           </td>
           <td>
             {% if item.dollarsong_link %}
             <a href="{{ item.dollarsong_link }}">dollarsong</a>
             {% endif %}
+            {% if item.dollarsong_link1 %}
+            <a href="{{ item.dollarsong_link1 }}">dollarsong1</a>
+            {% endif %}
+            {% if item.dollarsong_link2 %}
+            <a href="{{ item.dollarsong_link2 }}">dollarsong2</a>
+            {% endif %}
+            {% if item.dollarsong_link3 %}
+            <a href="{{ item.dollarsong_link3 }}">dollarsong3</a>
+            {% endif %}
           </td>
           <td>
             {% if item.songartist_link %}
             <a href="{{ item.songartist_link }}">songartist</a>
             {% endif %}
+            {% if item.songartist_link1 %}
+            <a href="{{ item.songartist_link1 }}">songartist1</a>
+            {% endif %}
+            {% if item.songartist_link2 %}
+            <a href="{{ item.songartist_link2 }}">songartist2</a>
+            {% endif %}
+            {% if item.songartist_link3 %}
+            <a href="{{ item.songartist_link3 }}">songartist3</a>
+            {% endif %}
           </td>
           <td>
             {% if item.dollarartist_link %}
             <a href="{{ item.dollarartist_link }}">dollarartist</a>
+            {% endif %}
+            {% if item.dollarartist_link1 %}
+            <a href="{{ item.dollarartist_link1 }}">dollarartist1</a>
+            {% endif %}
+            {% if item.dollarartist_link2 %}
+            <a href="{{ item.dollarartist_link2 }}">dollarartist2</a>
+            {% endif %}
+            {% if item.dollarartist_link3 %}
+            <a href="{{ item.dollarartist_link3 }}">dollarartist3</a>
+            {% endif %}
+          </td>
+          <td>
+            {% if item.jazzsongsoldnum_link %}
+            <a href="{{ item.jazzsongsoldnum_link }}">jazzsongsoldnum</a>
+            {% endif %}
+            {% if item.jazzsongsoldnum_link1 %}
+            <a href="{{ item.jazzsongsoldnum_link1 }}">jazzsongsoldnum1</a>
+            {% endif %}
+            {% if item.jazzsongsoldnum_link2 %}
+            <a href="{{ item.jazzsongsoldnum_link2 }}">jazzsongsoldnum2</a>
+            {% endif %}
+            {% if item.jazzsongsoldnum_link3 %}
+            <a href="{{ item.jazzsongsoldnum_link3 }}">jazzsongsoldnum3</a>
+            {% endif %}
+          </td>
+          <td>
+            {% if item.jazzdollarsong_link %}
+            <a href="{{ item.jazzdollarsong_link }}">jazzdollarsong</a>
+            {% endif %}
+            {% if item.jazzdollarsong_link1 %}
+            <a href="{{ item.jazzdollarsong_link1 }}">jazzdollarsong1</a>
+            {% endif %}
+            {% if item.jazzdollarsong_link2 %}
+            <a href="{{ item.jazzdollarsong_link2 }}">jazzdollarsong2</a>
+            {% endif %}
+            {% if item.jazzdollarsong_link3 %}
+            <a href="{{ item.jazzdollarsong_link3 }}">jazzdollarsong3</a>
+            {% endif %}
+          </td>
+          <td>
+            {% if item.jazzsongartist_link %}
+            <a href="{{ item.jazzsongartist_link }}">jazzsongartist</a>
+            {% endif %}
+            {% if item.jazzsongartist_link1 %}
+            <a href="{{ item.jazzsongartist_link }}">jazzsongartist1</a>
+            {% endif %}
+            {% if item.jazzsongartist_link2 %}
+            <a href="{{ item.jazzsongartist_link }}">jazzsongartist2</a>
+            {% endif %}
+            {% if item.jazzsongartist_link3 %}
+            <a href="{{ item.jazzsongartist_link }}">jazzsongartist3</a>
+            {% endif %}
+          </td>
+          <td>
+            {% if item.jazzdollarartist_link %}
+            <a href="{{ item.jazzdollarartist_link }}">jazzdollarartist</a>
+            {% endif %}
+            {% if item.jazzdollarartist_link1 %}
+            <a href="{{ item.jazzdollarartist_link1 }}">jazzdollarartist1</a>
+            {% endif %}
+            {% if item.jazzdollarartist_link2 %}
+            <a href="{{ item.jazzdollarartist_link2 }}">jazzdollarartist2</a>
+            {% endif %}
+            {% if item.jazzdollarartist_link3 %}
+            <a href="{{ item.jazzdollarartist_link3 }}">jazzdollarartist3</a>
+            {% endif %}
+          </td>
+          <td>
+            {% if item.mostbuytogether_link %}
+            <a href="{{ item.mostbuytogether_link }}">mostbuytogether</a>
+            {% endif %}
+            {% if item.mostbuytogether_link1 %}
+            <a href="{{ item.mostbuytogether_link1 }}">mostbuytogether1</a>
+            {% endif %}
+            {% if item.mostbuytogether_link2 %}
+            <a href="{{ item.mostbuytogether_link2 }}">mostbuytogether2</a>
+            {% endif %}
+            {% if item.mostbuytogether_link3 %}
+            <a href="{{ item.mostbuytogether_link3 }}">mostbuytogether3</a>
             {% endif %}
           </td>
         </tr>
@@ -88,11 +193,19 @@
         <br />
         <table>
           <tr>
-            <td><input type="submit" id="word_count" name="word_count" value="Word Count" disabled="true"></td>
             <td><input type="submit" id="song_sold_num" name="song_sold_num" value="Song Sold Num" disabled="true"></td>
             <td><input type="submit" id="dollar_song" name="dollar_song" value="Dollar Each Song" disabled="true"></td>
             <td><input type="submit" id="song_artist" name="song_artist" value="Song Each Artist" disabled="true"></td>
             <td><input type="submit" id="dollar_artist" name="dollar_artist" value="Dollar Each Artist" disabled="true"></td>
+          </tr>
+          <tr>
+            <td><input type="submit" id="jazz_song_sold_num" name="jazz_song_sold_num" value="Jazz - Song Sold Num" disabled="true"></td>
+            <td><input type="submit" id="jazz_dollar_song" name="jazz_dollar_song" value="Jazz - Dollar Each Song" disabled="true"></td>
+            <td><input type="submit" id="jazz_song_artist" name="jazz_song_artist" value="Jazz - Song Each Artist" disabled="true"></td>
+            <td><input type="submit" id="jazz_dollar_artist" name="jazz_dollar_artist" value="Jazz - Dollar Each Artist" disabled="true"></td>
+          </tr>
+          <tr>
+            <td><input type="submit" id="most_buy_together" name="most_buy_together" value="Most Buy Together" disabled="true"></td>
           </tr>
         </table>
       </form>

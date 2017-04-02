@@ -27,10 +27,14 @@ function updateForm(filekey, blobkey, filename) {
   $('#filekey').val(filekey);
   $('#blobkey').val(blobkey);
 
-  $('#word_count').removeAttr('disabled');
   $('#song_sold_num').removeAttr('disabled');
   $('#dollar_song').removeAttr('disabled');
   $('#song_artist').removeAttr('disabled');
   $('#dollar_artist').removeAttr('disabled');
+  $('#jazz_song_sold_num').removeAttr('disabled');
+  $('#jazz_dollar_song').removeAttr('disabled');
+  $('#jazz_song_artist').removeAttr('disabled');
+  $('#jazz_dollar_artist').removeAttr('disabled');
+  $('#most_buy_together').removeAttr('disabled');
 }
 

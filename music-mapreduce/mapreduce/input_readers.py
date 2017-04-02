@@ -1388,11 +1388,13 @@ class BlobstoreLineInputReader(InputReader):
       raise BadReaderParamsError("Too many 'blob_keys' for mapper input")
     if not blob_keys:
       raise BadReaderParamsError("No 'blob_keys' specified for mapper input")
+
     for blob_key in blob_keys:
       blob_info = blobstore.BlobInfo.get(blobstore.BlobKey(blob_key))
       if not blob_info:
         raise BadReaderParamsError("Could not find blobinfo for key %s" %
                                    blob_key)
+
 
   @classmethod
   def split_input(cls, mapper_spec):
