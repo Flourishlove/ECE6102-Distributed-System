@@ -1,5 +1,7 @@
 ECE6102 course assignment
+
 Click to View [Music-Repository](http://xingyu-liu-music-shopping.appspot.com/) 
+
 Click to View [Transactions-Mapreduce-Analysis](http://music-mapreduce-xingyu-liu.appspot.com/)
 
 # Music Repository
