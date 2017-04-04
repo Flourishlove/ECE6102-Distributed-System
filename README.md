@@ -1,9 +1,10 @@
 ECE6102 course assignment
-Click to View [Music-Repository](http://xingyu-liu-music-shopping.appspot.com/)
+Click to View [Music-Repository](http://xingyu-liu-music-shopping.appspot.com/) 
+Click to View [Transactions-Mapreduce-Analysis](http://music-mapreduce-xingyu-liu.appspot.com/)
 
 # Music Repository
 
-Music repository is a place where user can save and query songs' info. There are total three basic genres: hip-hop, classical and jazz. Maintain a shopping cart and allow customers to add songs they browse or search for to the shopping cart.
+Music repository is a place where user can save and query songs' info. There are total three basic genres: hip-hop, classical and jazz. Maintain a shopping cart and allow customers to add songs they browse or search for to the shopping cart. Design Mapreduce algorithm to analyze purchasing data generated from music shopping app using Google mapreduce opensource module.
 
 ## Basic Requirement
 1. Error handling for inputs: Check for empty inputs and display an appropriate error message when an input field is left empty.
@@ -17,18 +18,26 @@ Music repository is a place where user can save and query songs' info. There are
 3. The shopping cart key should be unique to a specific user so that multiple users can access the service simultaneously and maintain their own shopping carts.
 4. There should be a purchase feature, which allows users to buy the items in the cart. This should clear out the shopping cart and display a message thanking the user for their purchase. This action should also write entries to the data store to record the songs purchased and their prices, the date and time, and the user ID of the purchaser.
 
+## Mapreduce Requirement:
+A purchase includes date and time, user ID, song title, artist name, album title, genre, song running time, and price.
+Design Mapreduce code to implement the following analyses
+1. Count the number of songs sold for each song that has been purchased at least once.
+2. Calculate the total dollar amount of sales for each song.
+3. Count the number of songs sold for each artist that has had at least one.
+4. Calculate the total dollar amount of sales for each artist.
+5. For each song that was purchased at least once, find the other song that was purchased most often at the same time and count how many times the two songs were purchased together.
 
 ## Products
-- [App Engine][1]
+- [App Engine]
 
 ## Language
-- [Python][2]
+- [Python]
 
 ## APIs
-- [NDB Datastore API][3]
-- [Users API][4]
+- [NDB Datastore API]
+- [Users API]
 
 ## Dependencies
-- [webapp2][5]
-- [jinja2][6]
-- [Twitter Bootstrap][7]
+- [webapp2]
+- [jinja2]
+- [Twitter Bootstrap]
